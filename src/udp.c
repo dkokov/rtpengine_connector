@@ -8,6 +8,12 @@ void *udp_init(char *ip,short port)
 
 	strcpy(cfg->udp_server_ip,ip);
 	cfg->udp_server_port = port;
+	
+	cfg->recv_buf_ptr = mem_alloc(sizeof(udp_recv_buf_t));
+	if (cfg->recv_buf_ptr == NULL) {
+	    mem_free(cfg);
+	    return NULL;
+	}
 
 	return (void *)cfg;
 }
@@ -42,14 +48,18 @@ int udp_send(void *_cfg,char *msg)
 
 int udp_recv(void *_cfg)
 {
-	udp_conf_t *cfg = (udp_conf_t *) _cfg;
-    cfg->recv_buf_ptr->rcv_buf_len = recvfrom(cfg->sockfd, cfg->recv_buf_ptr->rcv_buf, UDP_RECV_BUF, 0, (struct sockaddr *)&cfg->server_addr, &cfg->addr_len);	
-        if (cfg->recv_buf_ptr->rcv_buf_len < 0) {
-        //perror("Error in recvfrom");
+    udp_conf_t *cfg = (udp_conf_t *) _cfg;
+
+    cfg->recv_buf_ptr->rcv_buf_len = recvfrom(cfg->sockfd, cfg->recv_buf_ptr->rcv_buf, UDP_RECV_BUF, 0, (struct sockaddr *)&cfg->server_addr, &cfg->addr_len);
+    if (cfg->recv_buf_ptr->rcv_buf_len < 0) {
+	printf("Error in recvfrom");
+	return -1;
     } else {
         cfg->recv_buf_ptr->rcv_buf[cfg->recv_buf_ptr->rcv_buf_len] = '\0';
         printf("Received: %s\n", cfg->recv_buf_ptr->rcv_buf);
     }
+
+    return 0;
 }
 
 void udp_close(void *_cfg)
