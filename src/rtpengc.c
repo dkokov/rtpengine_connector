@@ -4,8 +4,9 @@ void rtpengc_udp_init(rtpengc_conf_t *cfg)
 {
 	cfg->net_init = udp_init;
 	cfg->net_send = udp_send;
+	cfg->net_recv = udp_recv;
 	cfg->net_conn = udp_conn;
-	cfg->net_close = udp_close;	
+	cfg->net_close = udp_close;
 }
 
 void rtpengc_tcp_init(rtpengc_conf_t *cfg)
@@ -55,7 +56,7 @@ void rtpengc_recv(rtpengc_conf_t *cfg)
 
 void rtpengc_ping(rtpengc_conf_t *cfg)
 {
-	rtpengc_send(cfg,"5323_1 d7:command4:pinge");
+	rtpengc_send(cfg,"1234_5678_4 d7:command4:pinge");
 	rtpengc_recv(cfg);
 }
 
