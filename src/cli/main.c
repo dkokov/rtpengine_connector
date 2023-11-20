@@ -54,6 +54,10 @@ int main(int argc, char *argv[])
 			case ping:
 				rtpengc_ping(cfg);
 				break;
+			case offer:
+				break;
+			case answer:
+				break;
 			case delete:
 				rtpengc_delete("1234","10.0.0.1","1234567asdfg");
 				break;

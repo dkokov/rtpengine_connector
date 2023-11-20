@@ -89,10 +89,9 @@ void rtpengc_ping(rtpengc_conf_t *cfg)
 
 	memset(buf,0,RTPENGC_BUF_SIZE);
 	sprintf(buf,"%s %s",cookie_ptr,tmp);
-printf("%s\n",buf);
 
-//	rtpengc_send(cfg,buf);
-//	rtpengc_recv(cfg);
+	rtpengc_send(cfg,buf);
+	rtpengc_recv(cfg);
 
 	mem_free(tmp);
 	mem_free(cookie_ptr);
@@ -124,10 +123,9 @@ void rtpengc_delete(char *call_id,char *ip_addr,char *from_tag)
 
 	memset(buf,0,RTPENGC_BUF_SIZE);
 	sprintf(buf,"%s %s",cookie_ptr,tmp2);
-printf("%s\n",buf);
 
-//	rtpengc_send(cfg,buf);
-//	rtpengc_recv(cfg);
+	rtpengc_send(cfg,buf);
+	rtpengc_recv(cfg);
 
 	mem_free(tmp2);
 	mem_free(cookie_ptr);
