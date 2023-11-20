@@ -34,5 +34,6 @@ int rtpengc_conn(rtpengc_conf_t *cfg);
 void rtpengc_close(rtpengc_conf_t *cfg);
 void rtpengc_ping(rtpengc_conf_t *cfg);
 void rtpengc_delete(rtpengc_conf_t *cfg,char *call_id,char *ip_addr,char *from_tag);
+void rtpengc_offer(rtpengc_conf_t *cfg,char *sdp,char *call_id,char *ip_addr,char *from_tag);
 
 #endif

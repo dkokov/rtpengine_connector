@@ -77,6 +77,11 @@ char *rtpengc_received_from(char *ip_addr)
 	return bencode_append_str(bencode_bstring("received-from"),bencode_list(tmp));
 }
 
+char *rtpengc_sdp(char *sdp)
+{
+	return bencode_append_str(bencode_bstring("sdp"),bencode_bstring(sdp));
+}
+
 void rtpengc_ping(rtpengc_conf_t *cfg)
 {
 	char *tmp;
@@ -97,9 +102,73 @@ void rtpengc_ping(rtpengc_conf_t *cfg)
 	mem_free(cookie_ptr);
 }
 
-void rtpengc_offer()
+void rtpengc_offer(rtpengc_conf_t *cfg,char *sdp,char *call_id,char *ip_addr,char *from_tag)
 {
-	
+/*
+d3:sdp
+393:v=0
+o=- 1917940926 1917940926 IN IP4 190.239.16.180
+s=Asterisk
+c=IN IP4 190.239.16.180
+t=0 0
+m=audio 10530 RTP/AVP 0 8 18 9 97 2 3 101
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:18 G729/8000
+a=rtpmap:9 G722/8000
+a=rtpmap:97 iLBC/8000
+a=rtpmap:2 G726-32/8000
+a=rtpmap:3 GSM/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=ptime:20
+a=sendrecv
+a=direction:both
+
+9:direction
+4:both
+
+3:ICE
+6:remove
+
+7:replace
+l6:origin18:session-connectione
+
+18:transport-protocol7:RTP/AVP
+
+8:rtcp-muxl5:demuxe
+
+7:call-id36:5228ec66-5ae8-4022-82f4-2919becc1bf5
+
+13:received-froml3:IP410:10.42.3.80e
+
+8:from-tag36:45d28661-9d60-4c80-a846-795b0b9cbd71
+
+7:command5:offer
+e
+
+*/
+	char *tmp,*tmp2,*_sdp;
+	char buf[RTPENGC_BUF_SIZE];
+	char *cookie_ptr;
+
+	cookie_ptr = cookie_generator();
+
+	_sdp = rtpengc_sdp(sdp);
+	tmp = bencode_append_str(_sdp,rtpengc_call_id(call_id));
+	tmp2 = bencode_append_str(tmp,rtpengc_received_from(ip_addr));
+	tmp = bencode_append_str(tmp2,rtpengc_from_tag(from_tag));
+	tmp2 = bencode_append_str(tmp,rtpengc_command("offer"));
+	tmp = bencode_dictionary(tmp2);
+
+	memset(buf,0,RTPENGC_BUF_SIZE);
+	sprintf(buf,"%s %s",cookie_ptr,tmp);
+
+	rtpengc_send(cfg,buf);
+	rtpengc_recv(cfg);
+
+	mem_free(tmp2);
+	mem_free(cookie_ptr);
 }
 
 void rtpengc_answer()
