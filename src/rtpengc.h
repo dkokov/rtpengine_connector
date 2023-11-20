@@ -2,6 +2,10 @@
 #define RTPENGC_H
 
 #include "udp.h"
+#include "cookie.h"
+#include "bencode.h"
+
+#define RTPENGC_BUF_SIZE 2048
 
 typedef enum net_proto {
 	udp=1,
@@ -29,5 +33,6 @@ rtpengc_conf_t *rtpengc_init(char *proto, char *ip,short port);
 int rtpengc_conn(rtpengc_conf_t *cfg);
 void rtpengc_close(rtpengc_conf_t *cfg);
 void rtpengc_ping(rtpengc_conf_t *cfg);
+void rtpengc_delete(char *call_id,char *ip_addr,char *from_tag);
 
 #endif

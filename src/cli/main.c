@@ -23,15 +23,16 @@ int main(int argc, char *argv[])
 	rtpengc_conf_t *cfg = rtpengc_init("udp",ip,port);
 
 	if(cfg != NULL) {
-	    ret = rtpengc_conn(cfg);
+	    //ret = rtpengc_conn(cfg);
 	    if(ret == -1) {
 			/* Error */
 			printf("/nERROR/n");
-			return -1;
+			//return -1;
 	    }
 
-	    rtpengc_ping(cfg);
-	    rtpengc_close(cfg);
+	    //rtpengc_ping(cfg);
+	    rtpengc_delete("1234","10.0.0.1","1234567asdfg");
+	    //rtpengc_close(cfg);
 	}
 
 	return 0;
