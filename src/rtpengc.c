@@ -48,6 +48,7 @@ void rtpengc_close(rtpengc_conf_t *cfg)
 
 void rtpengc_send(rtpengc_conf_t *cfg,char *msg)
 {
+	printf("debug send: %s\n",msg);
 	cfg->net_send(cfg->net_cfg,msg);
 }
 
@@ -58,7 +59,7 @@ void rtpengc_recv(rtpengc_conf_t *cfg)
 
 char *rtpengc_call_id(char *call_id)
 {
-	return bencode_append_str(bencode_bstring("call_id"),bencode_bstring(call_id));
+	return bencode_append_str(bencode_bstring("call-id"),bencode_bstring(call_id));
 }
 
 char *rtpengc_command(char *command)
