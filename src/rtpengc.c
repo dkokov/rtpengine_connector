@@ -168,7 +168,7 @@ e
 	rtpengc_send(cfg,buf);
 	rtpengc_recv(cfg);
 
-	mem_free(tmp2);
+	mem_free(tmp);
 	mem_free(cookie_ptr);
 }
 
