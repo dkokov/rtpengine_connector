@@ -107,7 +107,7 @@ void rtpengc_answer()
 	
 }
 
-void rtpengc_delete(char *call_id,char *ip_addr,char *from_tag)
+void rtpengc_delete(rtpengc_conf_t *cfg,char *call_id,char *ip_addr,char *from_tag)
 {
 	char *tmp,*tmp2,*_call_id;
 	char buf[RTPENGC_BUF_SIZE];

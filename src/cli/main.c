@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 			case answer:
 				break;
 			case delete:
-				rtpengc_delete("1234","10.0.0.1","1234567asdfg");
+				rtpengc_delete(cfg,"1234","10.0.0.1","1234567asdfg");
 				break;
 		};
 
