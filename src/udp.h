@@ -31,5 +31,6 @@ int udp_conn(void *_cfg);
 int udp_send(void *_cfg,char *msg);
 int udp_recv(void *_cfg);
 void udp_close(void *_cfg);
+void udp_free(void *cfg);
 
 #endif

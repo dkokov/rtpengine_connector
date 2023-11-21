@@ -45,7 +45,7 @@ char *cookie_generator(void)
 	sprintf(buf,"%d_%d_%d",cookie_pattern_1,cookie_pattern_2,cookie_pattern_3);
 	len = strlen(buf);
 
-	ptr = mem_alloc(len);
+	ptr = mem_alloc(len+1);
 	if(ptr != NULL) {
 		strcpy(ptr,buf);
 	}

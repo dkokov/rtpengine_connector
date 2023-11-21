@@ -25,7 +25,7 @@ char *bencode_bstring(char *src)
 	sprintf(buf,"%d:%s",len,src);
 	len = strlen(buf);
 
-	ptr = mem_alloc(len);
+	ptr = mem_alloc(len+1);
 	if(ptr != NULL) {
 		strcpy(ptr,buf);
 	}
@@ -42,7 +42,7 @@ char *bencode_integer(int dig)
 	sprintf(buf,"i%de",dig);
 	len = strlen(buf);
 
-	ptr = mem_alloc(len);
+	ptr = mem_alloc(len+1);
 	if(ptr != NULL) {
 		strcpy(ptr,buf);
 	}
@@ -61,7 +61,7 @@ char *bencode_list(char *content)
 	sprintf(buf,"l%se",content);
 	len = strlen(buf);
 
-	ptr = mem_alloc(len);
+	ptr = mem_alloc(len+1);
 	if(ptr != NULL) {
 		strcpy(ptr,buf);
 	}
@@ -82,7 +82,7 @@ char *bencode_dictionary(char *content)
 	sprintf(buf,"d%se",content);
 	len = strlen(buf);
 
-	ptr = mem_alloc(len);
+	ptr = mem_alloc(len+1);
 	if(ptr != NULL) {
 		strcpy(ptr,buf);
 	}
@@ -150,7 +150,7 @@ char *bencode_append_str(char *curr,char *src)
 
 	len = strlen(buf);
 
-	ptr = mem_alloc(len);
+	ptr = mem_alloc(len+1);
 	if(ptr != NULL) {
 		strcpy(ptr,buf);
 	}

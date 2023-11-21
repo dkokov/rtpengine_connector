@@ -18,6 +18,20 @@ void *udp_init(char *ip,short port)
 	return (void *)cfg;
 }
 
+void udp_free(void *_cfg)
+{
+	udp_conf_t *cfg = (udp_conf_t *) _cfg;
+	if(cfg != NULL) {
+		if(cfg->recv_buf_ptr != NULL) {
+			mem_free(cfg->recv_buf_ptr);
+			cfg->recv_buf_ptr = NULL;
+		}
+
+		mem_free(cfg);
+		cfg = NULL;
+	}
+}
+
 int udp_conn(void *_cfg)
 {
 	udp_conf_t *cfg = (udp_conf_t *) _cfg;
