@@ -10,7 +10,7 @@
 
 #include "mem.h"
 
-#define UDP_RECV_BUF 1024
+#define UDP_RECV_BUF 4096
 
 typedef struct udp_recv_buf {
 	unsigned int rcv_buf_len;
