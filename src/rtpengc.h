@@ -18,6 +18,7 @@ typedef int (*net_conn_func)(void *);
 typedef void (*net_close_func)(void *);
 typedef int (*net_send_func)(void *,char *);
 typedef int (*net_recv_func)(void *);
+typedef void (*net_free_func)(void *);
 
 typedef struct rtpengc_conf {
 	net_proto_t t;
@@ -27,9 +28,11 @@ typedef struct rtpengc_conf {
 	net_close_func net_close;
 	net_send_func net_send;
 	net_recv_func net_recv;
+	net_free_func net_free;
 } rtpengc_conf_t;
 
 rtpengc_conf_t *rtpengc_init(char *proto, char *ip,short port);
+void rtpengc_free(rtpengc_conf_t *cfg);
 int rtpengc_conn(rtpengc_conf_t *cfg);
 void rtpengc_close(rtpengc_conf_t *cfg);
 void rtpengc_ping(rtpengc_conf_t *cfg);

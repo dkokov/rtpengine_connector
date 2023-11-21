@@ -3,9 +3,9 @@
 #define UDP_SERVER_DEFAULT "127.0.0.1"
 #define UDP_PORT_DEFAULT 2223
 
-#define TEST_CALL_ID "1234"
-#define TEST_IP_ADDR "1.2.3.4"
-#define TEST_FROM_TAG "12345678abcd"
+#define TEST_CALL_ID "1234567890abcdef-1234567890-1234567890abcdef-1234567890"
+#define TEST_IP_ADDR "123.123.123.124"
+#define TEST_FROM_TAG "b1ca3a4b1abcd"
 #define TEST_SDP "v=0\r\no=- 1917940926 1917940926 IN IP4 190.239.16.180\r\ns=Asterisk\r\nc=IN IP4 190.239.16.180\r\nt=0 0\r\nm=audio 10530 RTP/AVP 0 8 18 9 97 2 3 101\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:18 G729/8000\r\na=rtpmap:9 G722/8000\r\na=rtpmap:97 iLBC/8000\r\na=rtpmap:2 G726-32/8000\r\na=rtpmap:3 GSM/8000\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-16\r\na=ptime:20\r\na=sendrecv\r\na=direction:both\r\n"
 
 
@@ -71,6 +71,7 @@ int main(int argc, char *argv[])
 		};
 
 		rtpengc_close(cfg);
+		rtpengc_free(cfg);
 	}
 
 	return 0;

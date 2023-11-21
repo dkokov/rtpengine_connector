@@ -7,6 +7,7 @@ void rtpengc_udp_init(rtpengc_conf_t *cfg)
 	cfg->net_recv = udp_recv;
 	cfg->net_conn = udp_conn;
 	cfg->net_close = udp_close;
+	cfg->net_free = udp_free;
 }
 
 void rtpengc_tcp_init(rtpengc_conf_t *cfg)
@@ -34,6 +35,19 @@ rtpengc_conf_t *rtpengc_init(char *proto, char *ip,short port)
 	cookie_init();
 
 	return cfg;
+}
+
+void rtpengc_free(rtpengc_conf_t *cfg)
+{
+	if(cfg != NULL) {
+		if(cfg->net_cfg != NULL) {
+			cfg->net_free(cfg->net_cfg);
+			cfg->net_cfg = NULL;
+		}
+
+		mem_free(cfg);
+		cfg = NULL;
+	}
 }
 
 int rtpengc_conn(rtpengc_conf_t *cfg)
